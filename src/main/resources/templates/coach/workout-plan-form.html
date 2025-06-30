@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Workout Plan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Create Workout Plan</h2>
+    <form th:action="@{/coach/workout-plans}" th:object="${plan}" method="post">
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" th:field="*{description}" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exercises" class="form-label">Exercises (comma-separated)</label>
+            <input type="text" class="form-control" id="exercises" th:field="*{exercises}" required>
+        </div>
+        <div class="mb-3">
+            <label for="userId" class="form-label">Assign to User</label>
+            <select class="form-select" id="userId" name="userId" required>
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Create Plan</button>
+        <a href="/coach/workout-plans" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</body>
+</html> 
